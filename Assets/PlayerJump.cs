@@ -19,4 +19,15 @@ public class PlayerJump : MonoBehaviour
             rb.linearVelocity = Vector2.up * jumpForce;
         }
     }
+
+    // 敵（Trigger設定のもの）に触れた瞬間に呼ばれる
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.name == "Enemy")
+        {
+            Debug.Log("ゲームオーバー！");
+            // プレイヤーを消す
+            Destroy(gameObject);
+        }
+    }
 }
