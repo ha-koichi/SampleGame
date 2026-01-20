@@ -23,7 +23,7 @@ public class PlayerJump : MonoBehaviour
     // 敵（Trigger設定のもの）に触れた瞬間に呼ばれる
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Enemy")
+        if (other.gameObject.name == "Enemy" || other.gameObject.name == "Enemy(Clone)")
         {
             Debug.Log("ゲームオーバー！");
             // プレイヤーを消す
