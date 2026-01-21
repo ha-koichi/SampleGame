@@ -15,4 +15,15 @@ public class EnemyMove : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    // 敵側のスクリプトに追記
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // 当たった相手のタグ（または名前）が Bullet だったら
+        if (other.gameObject.name.Contains("Bullet"))
+        {
+            Destroy(other.gameObject); // 弾を消す
+            Destroy(gameObject);       // 自分（敵）を消す
+        }
+    }
 }

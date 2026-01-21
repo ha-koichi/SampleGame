@@ -4,6 +4,7 @@ public class PlayerJump : MonoBehaviour
 {
     public float jumpForce = 5.0f;
     public float moveSpeed = 5.0f; // 横移動のスピードを追加
+    public GameObject bulletPrefab; // 弾の設計図をインスペクターで入れる
     Rigidbody2D rb;
 
     void Start()
@@ -32,6 +33,13 @@ public class PlayerJump : MonoBehaviour
 
         // 現在の縦の速度（y）は維持したまま、横の速度（x）だけ書き換える
         rb.linearVelocity = new Vector2(xInput * moveSpeed, rb.linearVelocity.y);
+
+        // スペースキーが押されたら
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // プレイヤーの位置に弾を生成
+            Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        }
     }
 
     // 敵（Trigger設定のもの）に触れた瞬間に呼ばれる
