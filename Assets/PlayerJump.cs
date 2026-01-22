@@ -5,6 +5,7 @@ public class PlayerJump : MonoBehaviour
     public float jumpForce = 5.0f;
     public float moveSpeed = 5.0f; // 横移動のスピードを追加
     public GameObject bulletPrefab; // 弾の設計図をインスペクターで入れる
+    public GameObject gameOverCanvas; // 準備したCanvasをここに入れる
     Rigidbody2D rb;
 
     void Start()
@@ -45,11 +46,18 @@ public class PlayerJump : MonoBehaviour
     // 敵（Trigger設定のもの）に触れた瞬間に呼ばれる
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "Enemy" || other.gameObject.name == "Enemy(Clone)")
+        if (other.gameObject.name.Contains("Enemy"))
         {
-            Debug.Log("ゲームオーバー！");
             // プレイヤーを消す
             Destroy(gameObject);
+            GameOver();
         }
+    }
+
+    void GameOver()
+    {
+        Debug.Log("ゲームオーバー！");
+        gameOverCanvas.SetActive(true); // リトライ画面を表示
+        Time.timeScale = 0f;           // ゲームの時間を止める（一時停止）
     }
 }
